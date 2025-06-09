@@ -9,6 +9,8 @@ from sklearn.preprocessing import LabelEncoder
 import re
 import requests
 from moviepy import VideoFileClip
+import tensorflow.keras 
+
 label_encoder = LabelEncoder()
 
 
@@ -45,7 +47,7 @@ st.sidebar.text('8. Northern European')
 st.sidebar.text('9. Eastern European')
 st.sidebar.text('10. Oceanian or Other')
 
-url = "https://www.streamlit.io"
+url = "https://github.com/akhilmuraleedharan/Accent_detection_NN"
 st.sidebar.write("The full code for the agent is avilable in this [link](%s)" % url)
 label_encoder = pickle.load(open("label_encoder.pkl", 'rb'))
 
