@@ -2,3 +2,4 @@ streamlit
 scikit-learn
 librosa
 moviepy
+tensorflow==2.17.0
