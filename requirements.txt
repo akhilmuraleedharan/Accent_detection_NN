@@ -1,0 +1,11 @@
+streamlit
+librosa
+warnings
+os
+pandas
+numpy
+re
+sklearn
+requests
+moviepy
+tensorflow
