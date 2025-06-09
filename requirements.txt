@@ -2,3 +2,4 @@ streamlit
 scikit-learn
 librosa
 moviepy
+Keras==2.4.3
