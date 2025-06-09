@@ -9,7 +9,6 @@ from sklearn.preprocessing import LabelEncoder
 import re
 import requests
 from moviepy import VideoFileClip
-import tensorflow
 label_encoder = LabelEncoder()
 
 
@@ -19,7 +18,7 @@ model = pickle.load(open('NN_Accent_prediction.pkl','rb'))
 import requests
 def download_video(url, save_path):
     headers = {
-        "User-Agent": "Mozilla/5.0",  # mimic a real browser
+        "User-Agent": "Mozilla/5.0",  
         "Accept": "*/*",
         "Connection": "keep-alive"
     }
@@ -51,20 +50,21 @@ st.sidebar.write("The full code for the agent is avilable in this [link](%s)" % 
 label_encoder = pickle.load(open("label_encoder.pkl", 'rb'))
 
 accent_url = st.text_input("Paste your link here")
-temp_file = "./video.mp4"
+temp_file_1 = "./video.mp4"
+temp_file_2 = "./audio.mp3"
 if st.button("Analyze"):
-    download_video(accent_url,temp_file)
-    cvt_video = VideoFileClip("video.mp4")
+    download_video(accent_url,temp_file_1)
+    cvt_video = VideoFileClip(temp_file_1)
     ext_audio = cvt_video.audio
 
-    ext_audio.write_audiofile("audio.mp3")
+    ext_audio.write_audiofile(temp_file_2)
     def extract_mfcc(file_path, n_mfcc=13):
         audio, sr = librosa.load(file_path, sr=None)
         mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=n_mfcc)
         mfcc_mean = np.mean(mfcc, axis=1)  # Rata-rata untuk setiap koefisien MFCC
         return mfcc_mean
     
-    mfcc_features = extract_mfcc("audio.mp3")
+    mfcc_features = extract_mfcc(temp_file_2)
     mfcc_features_reshaped = mfcc_features.reshape(1, mfcc_features.shape[0], 1)
     predicted_prob = model.predict(mfcc_features_reshaped)
     predicted_class = np.argmax(predicted_prob, axis=1)
