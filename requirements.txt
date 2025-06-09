@@ -1,6 +1,2 @@
 streamlit
-warnings
-os
-re
-requests
-moviepy
+scikit-learn
